@@ -1,0 +1,14 @@
+Package: mumodels
+Type: Package
+Title: Build Annual Fund Models for Millikin
+Version: 0.1.0
+Author: Jake Tolbert
+Maintainer: Jake Tolbert <jtolbert@millikin.edu>
+Description: Builds models to do prediction for annual fund for the Millikin
+    Alumni and Development Center.
+License: GPL v3 or later
+LazyData: TRUE
+Imports:
+    dplyr,
+    lubridate
+RoxygenNote: 5.0.1
