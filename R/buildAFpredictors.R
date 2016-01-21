@@ -2,7 +2,7 @@
 #'
 #' @description Builds a data frame suitable for doing prediction for annual fund.
 #'
-#' @param trainingyear  An integer value of the year of the data that should be used to train the models.
+#' @param trainingyear  An integer value of the year in 4 digit format (eg. 2012) of the data that should be used to train the models.
 #' @param yeartype  A character string describing the type of year. Choices should be "fiscal" or "calendar".
 #' @param trainingsource  A hallp-style source for the training data. Valid choises include database tables or a csv location.
 #'
@@ -11,7 +11,7 @@
 #' @import dplyr
 #' @export
 #'
-buildAFpredictors <- function( trainingyear, yeartype = 'fiscal', trainingsource = hallptbl )  {
+buildAFpredictors <- function( trainingyear, yeartype = 'fiscal', trainingsource = hallptbl, primaryonly = T )  {
 
 
 # set start, end dates and campaign -------------------------------------------------
@@ -60,7 +60,7 @@ outcomes  <- hallptbl  %>%
 traininggiving  <- buildtraininggiving( trainingyear, yeartype, trainingcampaign)
 
 readtrainingdata( trainingsource )  %>%
-   builddemographicdata(startdate = startdate)  %>%
+   builddemographicdata(startdate = startdate, primaryonly = primaryonly)  %>%
 
    # get fy14 giving info
    left_join(traininggiving, by = 'pidm')  %>%

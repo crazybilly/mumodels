@@ -11,5 +11,9 @@ LazyData: TRUE
 Imports:
     dplyr,
     lubridate,
-    stringr
+    stringr,
+    randomForest
 RoxygenNote: 5.0.1
+Suggests: knitr,
+    rmarkdown
+VignetteBuilder: knitr

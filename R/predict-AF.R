@@ -4,6 +4,7 @@
 #'
 #' @param models a list of models to predict from. Probably built with buildAFmodels().
 #' @param source a hallp-like source of data to do predictions from. Valid options include database tables and csvs.
+#' @param buildsource should the prediction data be built from source. If F, source is passed directly to train() without being processed by buildAFpredictors().
 #' @param currentyear an integer describing the current year.
 #' @param yeartype a character string describing the type of currentyear, either 'fiscal' or 'calendar'.
 #' @param pidms  a vector of pidms to do predictions on. If left NA, predictAF() will build predictions for everyone in source.

@@ -5,10 +5,10 @@
 \title{Build AF Predictors}
 \usage{
 buildAFpredictors(trainingyear, yeartype = "fiscal",
-  trainingsource = hallptbl)
+  trainingsource = hallptbl, primaryonly = T)
 }
 \arguments{
-\item{trainingyear}{An integer value of the year of the data that should be used to train the models.}
+\item{trainingyear}{An integer value of the year in 4 digit format (eg. 2012) of the data that should be used to train the models.}
 
 \item{yeartype}{A character string describing the type of year. Choices should be "fiscal" or "calendar".}
 

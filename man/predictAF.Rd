@@ -12,6 +12,8 @@ predictAF(models, source, buildsource = T, currentyear, yeartype = "fiscal",
 
 \item{source}{a hallp-like source of data to do predictions from. Valid options include database tables and csvs.}
 
+\item{buildsource}{should the prediction data be built from source. If F, source is passed directly to train() without being processed by buildAFpredictors().}
+
 \item{currentyear}{an integer describing the current year.}
 
 \item{yeartype}{a character string describing the type of currentyear, either 'fiscal' or 'calendar'.}
