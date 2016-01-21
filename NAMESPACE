@@ -3,3 +3,8 @@
 export(buildAFmodels)
 export(buildAFpredictors)
 export(predictAF)
+import(dplyr)
+import(randomForest)
+importFrom(lubridate,parse_date_time)
+importFrom(lubridate,ymd)
+importFrom(stringr,str_count)

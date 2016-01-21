@@ -4,7 +4,7 @@
 \alias{builddemographicdata}
 \title{Build Demographic Data}
 \usage{
-builddemographicdata(trainingdata, primaryonly = T)
+builddemographicdata(trainingdata, startdate, primaryonly = T)
 }
 \arguments{
 \item{trainingdata}{a hallp-style data frame.}

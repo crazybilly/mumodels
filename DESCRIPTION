@@ -6,9 +6,10 @@ Author: Jake Tolbert
 Maintainer: Jake Tolbert <jtolbert@millikin.edu>
 Description: Builds models to do prediction for annual fund for the Millikin
     Alumni and Development Center.
-License: GPL v3 or later
+License: GPL 3 or later
 LazyData: TRUE
 Imports:
     dplyr,
-    lubridate
+    lubridate,
+    stringr
 RoxygenNote: 5.0.1

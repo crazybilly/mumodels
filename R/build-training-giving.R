@@ -15,12 +15,16 @@
 #'        \item fyafgifts the total gifts in dollars that the constituent gave to the trainingcampaign within the specified criteria
 #'     }
 #'
+#'
 buildtraininggiving  <- function( trainingyear, yeartype, trainingcampaign ) {
 
 startfy1  <- createstartdate (trainingyear - 1, yeartype)
 endfy1    <- createenddate   (trainingyear - 1, yeartype)
 campfy1   <- createAFcampaign( trainingyear -1, yeartype)
 
+if( !exists('giftstbl' )) {
+   giftstbl  <- tbl(src_mysql('commits'), 'gifts')
+}
 
 # filter gifts table based on training year -------------------------------
    if( yeartype == 'fiscal') {

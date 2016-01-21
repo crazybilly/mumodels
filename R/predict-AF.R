@@ -9,22 +9,45 @@
 #' @param pidms  a vector of pidms to do predictions on. If left NA, predictAF() will build predictions for everyone in source.
 #'
 #' @return a data frame of pidms and one variable for each model used.
-#' @export
 #'
-predictAF  <- function( models, source, currentyear, yeartype,  pidms = NA) {
+#' @export
+#' @import dplyr
+#'
+predictAF  <- function( models, source, buildsource = T, currentyear, yeartype = 'fiscal',  pidms = NA) {
 
-   predictiondata  <- buildAFpredictors(trainingyear = currentyear, yeartype = yeartype, trainingsource = source)  %>%
-      select(-outcome_totalg, -outcome_donorfactor, -outcome_logg)
+   if( !exists('hallptbl' )) {
+      hallptbl  <- tbl(src_mysql('commits'), 'hallp')
+   }
 
+   # if you need to build the prediction data
+   if( buildsource == T) {
+      predictiondata  <- buildAFpredictors(trainingyear = currentyear, yeartype = yeartype, trainingsource = source)  %>%
+         select(-outcome_totalg, -outcome_donorfactor, -outcome_logg)
+
+   # if you don't need to build the predictions data
+   } else {
+
+      # throw an error if source is not a data frame
+      if( !is.data.frame(source) ) {
+         sourcename  <- as.character(bquote(source))
+         stop( paste("source object,", sourcename, "is not a data frame") )
+      }
+      predictiondata  <- source
+
+
+   }
 
    if( !is.na(pidms)) {
-      predictiondata  %<>%
+      predictiondata   <-  predictiondata  %>%
          filter( pidm %in% pidms)
    }
 
+   predictions  <- lapply( seq_along(models), function(i) {
+browser()
+      message( paste("predicting from", names(models)[i] ))
 
-   predictions  <- lapply( models, function(x) {
-      predict(x, predictiondata  %>% select(-pidm))
+      predict(models[[i]], predictiondata  %>% select(-pidm))
+
    })  %>%
    as.data.frame()  %>%
    tbl_df
