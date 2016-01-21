@@ -7,7 +7,7 @@
 #'
 #' @return a list of models. The names of the models will be be xxmodel, based on the options included in the models argument.
 #'
-#' @import randomForest
+#' @importFrom randomForest randomForest
 #' @export
 #'
 buildAFmodels  <- function( trainingdata, models = c('rf', 'lm', 'glm') ) {

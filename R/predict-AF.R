@@ -43,7 +43,7 @@ predictAF  <- function( models, source, buildsource = T, currentyear, yeartype =
    }
 
    predictions  <- lapply( seq_along(models), function(i) {
-browser()
+
       message( paste("predicting from", names(models)[i] ))
 
       predict(models[[i]], predictiondata  %>% select(-pidm))
