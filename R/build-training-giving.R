@@ -35,14 +35,14 @@ if( !exists('giftstbl' )) {
    } else {
       traininggiving  <- giftstbl  %>%
          filter(
-            GIFT_DATE >= startfy1
-            , GIFT_DATE <= endfy1
+              gift_date >= startfy1
+            , gift_date <= endfy1
          )
    }
 
 # summarize training giving -----------------------------------------------
    trainiinggiving  <- traininggiving %>%
-      select(pidm = PIDM, giftamt = GIFT_AMT, desg = GIFT_DESG, campaign = CAMPAIGN)  %>%
+      select(pidm  , giftamt = gift_amt, desg , campaign )  %>%
       collect %>%
       group_by(pidm)  %>%
       summarize( fy1giftsnum = n(), fy1totalg = sum(giftamt), fy1numdesgs = n_distinct(desg)

@@ -18,6 +18,8 @@ buildAFmodels  <- function( trainingdata, models = c('rf', 'lm', 'glm') ) {
          select(-pidm)
    }
 
+   results = list()
+
    if( "lm" %in% models) {
 
       message("Training lm model")
@@ -26,6 +28,8 @@ buildAFmodels  <- function( trainingdata, models = c('rf', 'lm', 'glm') ) {
          select(-outcome_totalg, -outcome_donorfactor)
 
       lmmodel  <- lm( outcome_logg ~ . , data = lmdata )
+
+      results$lm = lmmodel
 
    }
 
@@ -39,6 +43,8 @@ buildAFmodels  <- function( trainingdata, models = c('rf', 'lm', 'glm') ) {
 
       glmmodel  <- glm( outcome_donorfactor~ . , data = glmdata )
 
+      results$glm = glmmodel
+
    }
 
    if ("rf" %in% models ) {
@@ -50,12 +56,12 @@ buildAFmodels  <- function( trainingdata, models = c('rf', 'lm', 'glm') ) {
 
       rfmodel  <- randomForest( outcome_donorfactor ~ . , data = rfdata)
 
+      results$rf = rfmodel
    }
 
 
 
-  list(lmmodel = lmmodel, glmmodel = glmmodel, rfmodel = rfmodel)
-
+ results
 
 
 }

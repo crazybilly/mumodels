@@ -35,12 +35,12 @@ outcomes  <- hallptbl  %>%
    left_join(
       giftstbl  %>%
          filter(
-              CAMPAIGN %like% trainingcampaign
-            , GIFT_DATE >= startdate
-            , GIFT_DATE <= enddate
+              campaign %like% trainingcampaign
+            , gift_date >= startdate
+            , gift_date <= enddate
             )  %>%
-         group_by(PIDM)  %>%
-         summarize( totalg = sum(GIFT_AMT) )
+         group_by(pidm)  %>%
+         summarize( totalg = sum(gift_amt) )
       , by = 'pidm'
       , copy = T
       ) %>%

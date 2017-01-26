@@ -51,7 +51,8 @@ predictAF  <- function( models, source, buildsource = T, currentyear, yeartype =
 
    })  %>%
    as.data.frame()  %>%
-   tbl_df
+   tbl_df  %>%
+   setNames(names(models))
 
    predictions$pidm  <- predictiondata$pidm
 
