@@ -54,30 +54,30 @@ createAFcampaign  <- function(trainingyear, yeartype) {
    }
 
 }
-
-#' Parse Dates
 #'
-#' @description combines lubridate's parse_date_time and guess_formats functions to parse a variety of date formats
+#' #' Parse Dates
+#' #'
+#' #' @description combines lubridate's parse_date_time and guess_formats functions to parse a variety of date formats
+#' #'
+#' #' @param x a vector of date-time type data to parse
+#' #' @param orders a character vector of possible date formats
+#' #' @param fill value to fill in known NA values.
+#' #'
+#' #' @return a POSIXct vector
+#' #'
+#' parsedates  <- function(x, orders, fill = NA) {
 #'
-#' @param x a vector of date-time type data to parse
-#' @param orders a character vector of possible date formats
-#' @param fill value to fill in known NA values.
+#'    theorder  <- lubridate::guess_formats(x, orders)
 #'
-#' @return a POSIXct vector
+#'    navalues  <- c('','0000-00-00','0000-00-00 00:00:00')
+#'    naindex   <- x %in% navalues | is.na(x)
 #'
-parsedates  <- function(x, orders, fill = NA) {
-
-   theorder  <- lubridate::guess_formats(x, orders)
-
-   navalues  <- c('','0000-00-00','0000-00-00 00:00:00')
-   naindex   <- x %in% navalues | is.na(x)
-
-   parsedx  <- lubridate::parse_date_time(x, lubridate::guess_formats(x,orders))
-
-   parsedx[naindex]  <- fill
-
-   parsedx
-}
+#'    parsedx  <- lubridate::parse_date_time(x, lubridate::guess_formats(x,orders))
+#'
+#'    parsedx[naindex]  <- fill
+#'
+#'    parsedx
+#' }
 
 
 
@@ -100,7 +100,8 @@ bindates  <- function(x, orders, sincewhen = Sys.Date(), neverfill = "never") {
 
 
    # parse character vectors
-   parseddts  <- parsedates(x, orders)
+   # parseddts  <- parsedates(x, orders)
+   parseddts  <- lubridate::parse_date_time(x,orders = orders)
 
    # compare to whatever cutoff date is set in sincewhen
    diffdts  <- as.numeric(difftime(sincewhen, parseddts))
