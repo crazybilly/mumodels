@@ -17,4 +17,3 @@ a list of models. The names of the models will be be xxmodel, based on the optio
 \description{
 Build models to predict annual fund giving.
 }
-

@@ -17,4 +17,3 @@ the POSIXct date on which trainingyear ended
 \description{
 create a POSIXct date of when the year ends
 }
-

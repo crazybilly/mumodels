@@ -26,4 +26,3 @@ a data frame with everyone from the giving table, the following columns:
 \description{
 builds a data frame of training data from the gifts table, based on specified criteria
 }
-

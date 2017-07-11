@@ -2,7 +2,7 @@
 #'
 #' @description Build a hallp-style data frame of raw data from a source.
 #'
-#' @param source A source for the data. Can be either a hallp-style database table or a csv.
+#' @param source A hallp-style source for the data. Can be either a local object or a sql table.
 #'
 #' @return a hallp-style data frame with the fields necessary to build the training and prediction data.
 #'
@@ -40,10 +40,14 @@ if ( any(grepl('sql',class(source))) ) {
             })
          })
 
-#if the source is not a database (assuming it's a csv of some sort)
+# if the source is not a database (assuming it's a local data frame)
 } else {
 
-   traininghallp  <- read.csv(source, stringsAsFactors = F)  %>% tbl_df
+
+   # traininghallp  <- read.csv(source, stringsAsFactors = F)  %>% tbl_df
+   traininghallp  <- tbl_df(source)
+
+
    names(traininghallp)  <- gsub("\\.|,|-| |_|\\/","",names(traininghallp))
    names(traininghallp)  <- tolower(names(traininghallp))
 
@@ -57,12 +61,12 @@ if ( any(grepl('sql',class(source))) ) {
          )
 
       #deal with all the different ways college vars can be named
-      if( sum(grepl('college', names(traininghallp))) < 2) {
-         names(traininghallp)[grepl('college', names(traininghallp))]  <- 'alumnicollege'
-      } else if (sum(grepl('college', names(traininghallp))) >= 2)   {
-         names(traininghallp)[grepl('college', names(traininghallp)) & grepl('alumni', names(traininghallp))  ]  <- 'alumnicollege'
-         traininghallp  <- traininghallp[, names(traininghallp) != 'alumnicollege' & grepl('college', traininghallp)   ]
-      }
+      # if( sum(grepl('college', names(traininghallp))) < 2) {
+      #    names(traininghallp)[grepl('college', names(traininghallp))]  <- 'alumnicollege'
+      # } else if (sum(grepl('college', names(traininghallp))) >= 2)   {
+      #    names(traininghallp)[grepl('college', names(traininghallp)) & grepl('alumni', names(traininghallp))  ]  <- 'alumnicollege'
+      #    traininghallp  <- traininghallp[, names(traininghallp) != 'alumnicollege' & grepl('college', traininghallp)   ]
+      # }
 
    }
 
@@ -82,6 +86,8 @@ if ( any(grepl('sql',class(source))) ) {
       )}
    )
 }
+
+foo  <- traininghallp
 
 return(traininghallp)
 

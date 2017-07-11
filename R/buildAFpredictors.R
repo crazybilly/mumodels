@@ -20,17 +20,24 @@ startdate  <- createstartdate(trainingyear, yeartype)
 enddate    <- createenddate  (trainingyear, yeartype)
 trainingcampaign  <- createAFcampaign( trainingyear, yeartype)
 
-if( !exists('hallptbl' )) {
-   hallptbl  <- tbl(src_mysql('commits'), 'hallp')
+if( missing(trainingsource) ) {
+   trainingsource <- tbl(src_mysql('commits', host = '10.40.9.145', user = 'adc', password = 'goBigBlue'), 'hallp')
 }
 
 if( !exists('giftstbl' )) {
-   giftstbl  <- tbl(src_mysql('commits'), 'gifts')
+   giftstbl  <- tbl(src_mysql('commits', host = '10.40.9.145', user = 'adc', password = 'goBigBlue'), 'gifts')
 }
+
+
+if(class(trainingsource) == 'character') {
+   trainingsource  <- read.tidy(trainingsource)
+}
+
+
 
 # build outcomes ----------------------------------------------------------
 
-outcomes  <- hallptbl  %>%
+outcomes  <- trainingsource %>%
    select(pidm)  %>%
    left_join(
       giftstbl  %>%
@@ -59,8 +66,9 @@ outcomes  <- hallptbl  %>%
 
 traininggiving  <- buildtraininggiving( trainingyear, yeartype, trainingcampaign)
 
-readtrainingdata( trainingsource )  %>%
-   builddemographicdata(startdate = startdate, primaryonly = primaryonly)  %>%
+trainingdata  <- readtrainingdata( trainingsource )
+
+builddemographicdata(trainingdata, startdate = startdate, primaryonly = primaryonly)  %>%
 
    # get fy14 giving info
    left_join(traininggiving, by = 'pidm')  %>%

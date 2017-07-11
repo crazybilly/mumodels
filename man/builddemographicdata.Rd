@@ -17,4 +17,3 @@ a data frame with the established predictor data.
 \description{
 build a set of predictors from a set of hallp data
 }
-

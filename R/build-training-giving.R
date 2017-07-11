@@ -41,13 +41,41 @@ if( !exists('giftstbl' )) {
    }
 
 # summarize training giving -----------------------------------------------
-   trainiinggiving  <- traininggiving %>%
-      select(pidm  , giftamt = gift_amt, desg , campaign )  %>%
-      collect %>%
-      group_by(pidm)  %>%
-      summarize( fy1giftsnum = n(), fy1totalg = sum(giftamt), fy1numdesgs = n_distinct(desg)
+
+   traininggiving  <- tryCatch({
+            # try with new names
+            traininggiving %>%
+               select(pidm  , giftamt = gift_amt, desg , campaign )  %>%
+               collect %>%
+               group_by(pidm)  %>%
+               summarize(
+                   fy1giftsnum = n(), fy1totalg = sum(giftamt), fy1numdesgs = n_distinct(desg)
                  , fy1afgifts = sum(ifelse(grepl(campfy1, campaign),1,0),na.rm=T)
-      )
+               )
+         }
+
+      # if that fails, try old school names
+      , error = function(x) {
+         tryCatch({
+            traininggiving %>%
+               select(pidm = PIDM, giftamt = GIFT_AMT, desg = GIFT_DESG , campaign = CAMPAIGN )  %>%
+               collect %>%
+               group_by(pidm)  %>%
+               summarize(
+                   fy1giftsnum = n(), fy1totalg = sum(giftamt), fy1numdesgs = n_distinct(desg)
+                 , fy1afgifts = sum(ifelse(grepl(campfy1, campaign),1,0),na.rm=T)
+               )
+         }
+
+         # if that doesn't work, throw an informative error
+         , error = function(x) {
+            source
+            warning("Training source for giving data does not contains necessary field names.")
+         })
+
+      })
+
+
 
 }
 

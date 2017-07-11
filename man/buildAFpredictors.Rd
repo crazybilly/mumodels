@@ -20,4 +20,3 @@ A data frame of data ready with pidms, 3 outcome variables (prefixed with "outco
 \description{
 Builds a data frame suitable for doing prediction for annual fund.
 }
-

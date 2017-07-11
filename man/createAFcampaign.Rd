@@ -17,4 +17,3 @@ a character string of the AF campaign within that year. If yeartype is not "fisc
 \description{
 determine the AF campaign based on a year
 }
-

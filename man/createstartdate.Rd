@@ -17,4 +17,3 @@ the POSIXct date on which trainingyear started
 \description{
 create a POSIXct date of when the year starts
 }
-
