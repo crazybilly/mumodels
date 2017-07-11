@@ -7,7 +7,7 @@
 readtrainingdata(source)
 }
 \arguments{
-\item{source}{A source for the data. Can be either a hallp-style database table or a csv.}
+\item{source}{A hallp-style source for the data. Can be either a local object or a sql table.}
 }
 \value{
 a hallp-style data frame with the fields necessary to build the training and prediction data.
@@ -15,4 +15,3 @@ a hallp-style data frame with the fields necessary to build the training and pre
 \description{
 Build a hallp-style data frame of raw data from a source.
 }
-

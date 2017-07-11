@@ -26,4 +26,3 @@ a data frame of pidms and one variable for each model used.
 \description{
 generate predictions from models with regard to AF giving.
 }
-
