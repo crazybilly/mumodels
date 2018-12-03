@@ -4,8 +4,8 @@
 \alias{predictAF}
 \title{Predict AF}
 \usage{
-predictAF(models, source, buildsource = T, currentyear, yeartype = "fiscal",
-  pidms = NA)
+predictAF(models, source, buildsource = T, currentyear,
+  yeartype = "fiscal", pidms = NA)
 }
 \arguments{
 \item{models}{a list of models to predict from. Probably built with buildAFmodels().}

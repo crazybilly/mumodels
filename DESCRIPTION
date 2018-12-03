@@ -1,7 +1,7 @@
 Package: mumodels
 Type: Package
 Title: Build Annual Fund Models for Millikin
-Version: 0.1.0
+Version: 0.2.0
 Author: Jake Tolbert
 Maintainer: Jake Tolbert <jtolbert@millikin.edu>
 Description: Builds models to do prediction for annual fund for the Millikin
@@ -12,8 +12,11 @@ Imports:
     dplyr,
     lubridate,
     stringr,
-    randomForest
-RoxygenNote: 6.0.1
+    randomForest,
+    broom,
+    PRROC,
+    caret
+RoxygenNote: 6.1.0
 Suggests: knitr,
     rmarkdown
 VignetteBuilder: knitr
